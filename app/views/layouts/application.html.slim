@@ -14,7 +14,9 @@ html[lang="en"]
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       button.navbar-toggler.navbar-toggler-right[type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
-      a.navbar-brand[href="#"] CurTrader
+
+      = link_to "CurTrader", root_path, class: "navbar-brand"
+
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
 

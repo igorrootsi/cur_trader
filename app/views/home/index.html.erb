@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">
+      Welcome to CurTrader!
+    </h1>
+
+    <% if user_signed_in? %>
+      <p>Please proceed to Trader</p>
+      <p><%= link_to "Trader", trader_path, class: 'btn btn-primary btn-lg' %></p>
+    <% else %>
+      <p>Please proceed to log in page.</p>
+      <p><%= link_to "Log in", new_user_session_path, class: 'btn btn-primary btn-lg' %></p>
+    <% end %>
+  </div>
+</div>
