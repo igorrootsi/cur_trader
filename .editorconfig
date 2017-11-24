@@ -1,5 +1,5 @@
 root = true
 
-[*.{rb,slim}]
+[*.{rb,slim,erb}]
 indent_style = space
 indent_size = 2

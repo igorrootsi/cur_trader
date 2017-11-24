@@ -13,4 +13,12 @@ module ApplicationHelper
       flash_type
     end
   end
+
+  def field_class_name(obj, field)
+    obj.errors.messages[field].empty? ? 'form-control' : 'form-control is-invalid'
+  end
+
+  def field_errors(obj, field)
+    tag.div obj.errors.messages[field].join(), class: 'invalid-feedback'
+  end
 end
