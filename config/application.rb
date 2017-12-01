@@ -17,3 +17,5 @@ module CurTrader
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+Time::DATE_FORMATS[:year_month_day] = '%Y-%B-%D'
