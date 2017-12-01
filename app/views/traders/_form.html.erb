@@ -38,6 +38,27 @@
         <%= field_errors @req, :waiting_time %>
       </div>
     </div>
+    <%= submit_tag "Find and save", class: "btn btn-primary" %>
     <%= submit_tag "Find", class: "btn btn-primary" %>
+
   <% end %>
+  <div class="dropdown show">
+    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Saved requests
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% current_user.prediction_requests.each do |request| %>
+        <span class="dropdown-item">
+          <span class="badge badge-secondary">X</span>
+          <a href="#">
+            <%= request.base_currency %> to
+            <%= request.target_currency %>;
+            Amount: <%= request.amount %>;
+            Waiting time:<%= request.waiting_time %>
+          </a>
+        </span>
+      <% end %>
+    </div>
+  </div>
 </div>

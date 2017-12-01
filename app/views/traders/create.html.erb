@@ -1,4 +1,33 @@
 <div class="container">
   <h2>Trader</h2>
   <%= render "form" %>
+
+  <br/>
+
+  <%= line_chart @dto.quotes.map(&:to_chart_item) %>
+
+  <table class="table table-sm table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Year/Week</th>
+        <th scope="col">Sum</th>
+        <th scope="col">Profit/Loss</th>
+        <th scope="col">Rate</th>
+        <th>Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dto.quotes.each do |quote| %>
+        <tr>
+          <th scope="row">
+            <%= quote.year_week %>
+          </th>
+          <td><%= quote.result %></td>
+          <td><%= quote.profit_loss(@dto.base) %></td>
+          <td><%= quote.rate %></td>
+          <td><%= quote.rank(@dto.ranks) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
