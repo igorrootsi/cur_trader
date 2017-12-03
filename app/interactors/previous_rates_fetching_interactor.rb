@@ -40,8 +40,9 @@ class PreviousRatesFetchingInteractor
 
   def fetch_missing_rates
     if @missing_weeks
-      actor = ::Providers::FixerIo::FetchDayRates.new(@prediction_request)
-      @missing_rates = actor.call(@missing_weeks) || []
+      actor = ::Providers::FixerIo::FetchDayRates
+              .new(@prediction_request, @missing_weeks)
+      @missing_rates = actor.call || []
     else
       @missing_weeks = []
     end
