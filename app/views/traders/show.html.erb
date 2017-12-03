@@ -1,7 +1,10 @@
 <div class="container">
   <h2>Trader</h2>
 
-  <%= render "form" %>
+  <%= render "form" do %>
+    <%= submit_tag "Fetch and save", data: { after: '' }, class: "btn btn-primary" %>
+    <%= submit_tag "Fetch", data: { after: 'delete' }, class: "btn btn-primary" %>
+  <% end %>
 
   <br/>
 

@@ -1,48 +1,47 @@
 <div class="container">
-  <%= form_for @req, url: '#' do |f| %>
+  <%= form_for @forecast_request, url: '#' do |f| %>
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= f.label :base_currency, "Base Currency" %>
         <%= f.select :base_currency,
-              options_for_select(ForecastRequest.supported_currencies, @req.base_currency),
+              options_for_select(ForecastRequest.supported_currencies, @forecast_request.base_currency),
               { include_blank: true, required: true },
-              { class: field_class_name(@req, :base_currency) } %>
+              { class: field_class_name(@forecast_request, :base_currency) } %>
 
-        <%= field_errors @req, :base_currency %>
+        <%= field_errors @forecast_request, :base_currency %>
       </div>
 
       <div class="form-group col-md-6">
         <%= f.label :target_currency, "Target Currency" %>
         <%= f.select :target_currency,
-              options_for_select(ForecastRequest.supported_currencies, @req.target_currency),
+              options_for_select(ForecastRequest.supported_currencies, @forecast_request.target_currency),
               { include_blank: true, required: true },
-              { class: field_class_name(@req, :target_currency) } %>
+              { class: field_class_name(@forecast_request, :target_currency) } %>
 
-        <%= field_errors @req, :target_currency %>
+        <%= field_errors @forecast_request, :target_currency %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= f.label :amount, "Amount" %>
-        <%= f.number_field :amount, required: true, class: field_class_name(@req, :amount) %>
+        <%= f.number_field :amount, required: true, class: field_class_name(@forecast_request, :amount) %>
 
-        <%= field_errors @req, :amount %>
+        <%= field_errors @forecast_request, :amount %>
       </div>
 
       <div class="form-group col-md-6">
         <%= f.label :waiting_time, "Max waiting time" %>
         <%= f.number_field :waiting_time,
               required: true,
-              in: 1..255, class: field_class_name(@req, :waiting_time) %>
+              in: 1..255, class: field_class_name(@forecast_request, :waiting_time) %>
 
-        <%= field_errors @req, :waiting_time %>
+        <%= field_errors @forecast_request, :waiting_time %>
       </div>
     </div>
     <%= f.hidden_field :user_id %>
 
-    <%= submit_tag "Find and save", class: "btn btn-primary" %>
-    <%= submit_tag "Find", class: "btn btn-primary" %>
+    <%= yield %>
 
   <% end %>
 </div>

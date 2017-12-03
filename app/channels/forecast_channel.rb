@@ -4,11 +4,7 @@ class ForecastChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    forecast_request = ForecastRequest.new(data)
-    forecast_request.stream_name = stream_name
-    forecast_request.save
-
-    ForecastJob.perform_now forecast_request
+    ForecastJob.perform_now get_forecast_request(data)
   end
 
   def stream_name
@@ -17,5 +13,16 @@ class ForecastChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+  end
+
+  def get_forecast_request(data)
+    merged = data.merge stream_name: stream_name
+
+    if data['after'] == 'update'
+      ForecastRequest.update(data['id'], merged)
+    else
+      merged.delete('id')
+      ForecastRequest.create(merged)
+    end
   end
 end

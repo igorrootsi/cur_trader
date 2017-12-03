@@ -12,6 +12,6 @@ class ForecastJob < ApplicationJob
 
     ActionCable.server.broadcast req.stream_name, html: html
 
-    req.delete unless req.user
+    req.delete if req.after == 'delete'
   end
 end

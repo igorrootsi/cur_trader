@@ -1,0 +1,33 @@
+<h2>Saved forecast requests</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Base currency</th>
+      <th scope="col">Target currency</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Waiting time</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @forecast_requests.each do |request| %>
+      <tr>
+        <td><%= request.base_currency %></th>
+        <td><%= request.target_currency %></td>
+        <td><%= request.amount %></td>
+        <td><%= request.waiting_time %></td>
+        <td>
+          <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+            <%= link_to 'View', request, class: "btn btn-primary" %>
+            <%= link_to 'Delete',
+                        request,
+                        method: :delete,
+                        data: { confirm: 'Are You sure?' },
+                        class: "btn btn-primary" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
