@@ -1,7 +1,7 @@
 params = {
-  channel: "PredictionChannel",
+  channel: "ForecastChannel",
   id: Math.random().toString().split('.')[1]
 }
 
-App.prediction = App.cable.subscriptions.create params,
-  received: (data) -> $('#prediction').html(data['html'])
+App.forecast = App.cable.subscriptions.create params,
+  received: (data) -> $('#forecast').html(data['html'])

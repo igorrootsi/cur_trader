@@ -1,11 +1,11 @@
-class PredictionJob < ApplicationJob
+class ForecastJob < ApplicationJob
   queue_as :default
 
   def perform(req)
-    dto = PredictionFetchingInteractor.new(req).call
+    dto = ForecastFetchingInteractor.new(req).call
 
     html = ApplicationController.renderer.render(
-      template: 'traders/prediction',
+      template: 'traders/forecast',
       locals: { dto: dto },
       layout: false
     )

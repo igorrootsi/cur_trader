@@ -1,8 +1,8 @@
-class PredictionGenerator
-  # @param [PredictionRequest] prediction_request
-  # @param [PredictionResponseDTO] dto
-  def initialize(prediction_request, dto)
-    @prediction_request = prediction_request
+class ForecastGenerator
+  # @param [ForecastRequest] forecast_request
+  # @param [ForecastResponseDTO] dto
+  def initialize(forecast_request, dto)
+    @forecast_request = forecast_request
     @dto                = dto
   end
 

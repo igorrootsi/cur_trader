@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :prediction_requests, dependent: :destroy
+  has_many :forecast_requests, dependent: :destroy
 end

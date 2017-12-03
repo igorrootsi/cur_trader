@@ -4,7 +4,7 @@
       <div class="form-group col-md-6">
         <%= f.label :base_currency, "Base Currency" %>
         <%= f.select :base_currency,
-              options_for_select(PredictionRequest.supported_currencies, @req.base_currency),
+              options_for_select(ForecastRequest.supported_currencies, @req.base_currency),
               { include_blank: true, required: true },
               { class: field_class_name(@req, :base_currency) } %>
 
@@ -14,7 +14,7 @@
       <div class="form-group col-md-6">
         <%= f.label :target_currency, "Target Currency" %>
         <%= f.select :target_currency,
-              options_for_select(PredictionRequest.supported_currencies, @req.target_currency),
+              options_for_select(ForecastRequest.supported_currencies, @req.target_currency),
               { include_blank: true, required: true },
               { class: field_class_name(@req, :target_currency) } %>
 

@@ -1,4 +1,4 @@
-# @attr [PredictionRequest] @context
+# @attr [ForecastRequest] @context
 class QuoteDecorator < ApplicationDecorator
   delegate_all
 

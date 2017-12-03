@@ -1,4 +1,4 @@
-class PredictionRequest < ApplicationRecord
+class ForecastRequest < ApplicationRecord
   def self.supported_currencies
     %w[
       AUD BGN BRL CAD CHF CNY CZK DKK EUR GBP HKD HRK HUF IDR ILS
