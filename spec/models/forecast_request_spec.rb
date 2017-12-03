@@ -1,6 +1,5 @@
-describe ForcastRequest do
+describe ForecastRequest do
   it { is_expected.to belong_to :user }
-  it { is_expected.to validate_presence_of :user }
 
   it { is_expected.to validate_presence_of :base_currency }
   it { is_expected.to validate_presence_of :target_currency }
@@ -9,7 +8,7 @@ describe ForcastRequest do
 
   context 'Base/Target currency difference' do
     subject do
-      build(:forcast_request, base_currency: 'EUR', target_currency: 'EUR')
+      build(:forecast_request, base_currency: 'EUR', target_currency: 'EUR')
     end
 
     before { subject.validate }

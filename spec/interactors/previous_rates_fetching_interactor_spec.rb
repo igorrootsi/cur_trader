@@ -3,9 +3,9 @@ require 'spec_helper'
 require_relative '../../app/interactors/previous_rates_fetching_interactor'
 
 describe PreviousRatesFetchingInteractor do
-  let(:forcast_request) { double :ForcastRequest }
+  let(:forecast_request) { double :forecastRequest }
 
-  subject { PreviousRatesFetchingInteractor.new(1, forcast_request) }
+  subject { PreviousRatesFetchingInteractor.new(1, forecast_request) }
 
   let(:cached_rates)  { [double(:DayRate1, date: Date.today)] }
   let(:missing_rates) { [double(:DayRate2, date: Date.today - 1.day)] }
@@ -63,7 +63,7 @@ describe PreviousRatesFetchingInteractor do
     let(:day_rate) { class_double('DayRate').as_stubbed_const }
 
     before do
-      expect(day_rate).to receive(:previous).with(1, forcast_request).and_return(cached_rates)
+      expect(day_rate).to receive(:previous).with(1, forecast_request).and_return(cached_rates)
 
       subject.fetch_previous_rates
     end

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :forcast_request do
+  factory :forecast_request do
     user
     base_currency FFaker::Currency.code
     target_currency FFaker::Currency.code
