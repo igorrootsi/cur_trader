@@ -21,7 +21,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     begin
       FactoryBot.find_definitions
-    rescue
+    rescue FactoryBot::DuplicateDefinitionError
       puts 'All factories are found'
     end
   end

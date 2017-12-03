@@ -2,6 +2,7 @@ require 'active_support/core_ext/numeric/time'
 require 'spec_helper'
 require_relative '../../app/interactors/previous_rates_fetching_interactor'
 
+# rubocop:disable Metrics/BlockLength
 describe PreviousRatesFetchingInteractor do
   let(:forecast_request) { double :forecastRequest }
 
@@ -50,7 +51,9 @@ describe PreviousRatesFetchingInteractor do
 
     before do
       expect(fetcher).to receive(:new)
-      expect(fetcher_instance).to receive(:call).with(missing_days) { missing_rates }
+      expect(fetcher_instance).to receive(:call).with(missing_days) do
+        missing_rates
+      end
 
       subject.missing_days = missing_days
       subject.fetch_missing_rates
@@ -63,7 +66,8 @@ describe PreviousRatesFetchingInteractor do
     let(:quote) { class_double('Quote').as_stubbed_const }
 
     before do
-      expect(quote).to receive(:previous).with(1, forecast_request).and_return(cached_rates)
+      expect(quote).to receive(:previous).with(1, forecast_request)
+                                         .and_return(cached_rates)
 
       subject.fetch_previous_rates
     end

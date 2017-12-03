@@ -7,7 +7,7 @@ describe Quote do
   it { is_expected.to validate_presence_of :rates }
 end
 
-describe Quote, '.previous' do
+describe Quote, '.previous' do # rubocop:disable Metrics/BlockLength
   let(:base_currency) { 'EUR' }
   let(:forecast_request) do
     build :forecast_request, base_currency: base_currency, waiting_time: 5
