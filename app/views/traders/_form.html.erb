@@ -5,7 +5,7 @@
         <%= f.label :base_currency, "Base Currency" %>
         <%= f.select :base_currency,
               options_for_select(PredictionRequest.supported_currencies, @req.base_currency),
-              {},
+              { include_blank: true, required: true },
               { class: field_class_name(@req, :base_currency) } %>
 
         <%= field_errors @req, :base_currency %>
@@ -15,7 +15,7 @@
         <%= f.label :target_currency, "Target Currency" %>
         <%= f.select :target_currency,
               options_for_select(PredictionRequest.supported_currencies, @req.target_currency),
-              {},
+              { include_blank: true, required: true },
               { class: field_class_name(@req, :target_currency) } %>
 
         <%= field_errors @req, :target_currency %>
@@ -25,7 +25,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= f.label :amount, "Amount" %>
-        <%= f.number_field :amount, class: field_class_name(@req, :amount) %>
+        <%= f.number_field :amount, required: true, class: field_class_name(@req, :amount) %>
 
         <%= field_errors @req, :amount %>
       </div>
@@ -33,6 +33,7 @@
       <div class="form-group col-md-6">
         <%= f.label :waiting_time, "Max waiting time" %>
         <%= f.number_field :waiting_time,
+              required: true,
               in: 1..255, class: field_class_name(@req, :waiting_time) %>
 
         <%= field_errors @req, :waiting_time %>
