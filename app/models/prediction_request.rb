@@ -7,9 +7,8 @@ class PredictionRequest < ApplicationRecord
     ]
   end
 
-  belongs_to :user
-  validates :user,
-            :base_currency,
+  belongs_to :user, optional: true
+  validates :base_currency,
             :target_currency,
             :amount,
             :waiting_time,

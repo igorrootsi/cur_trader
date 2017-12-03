@@ -1,11 +1,11 @@
 <div class="container">
-  <%= form_for @req, url: trader_path do |f| %>
+  <%= form_for @req, url: '#' do |f| %>
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= f.label :base_currency, "Base Currency" %>
         <%= f.select :base_currency,
-              options_for_select(@supported_currencies, @req.base_currency),
-              {},
+              options_for_select(PredictionRequest.supported_currencies, @req.base_currency),
+              { include_blank: true, required: true },
               { class: field_class_name(@req, :base_currency) } %>
 
         <%= field_errors @req, :base_currency %>
@@ -14,8 +14,8 @@
       <div class="form-group col-md-6">
         <%= f.label :target_currency, "Target Currency" %>
         <%= f.select :target_currency,
-              options_for_select(@supported_currencies, @req.target_currency),
-              {},
+              options_for_select(PredictionRequest.supported_currencies, @req.target_currency),
+              { include_blank: true, required: true },
               { class: field_class_name(@req, :target_currency) } %>
 
         <%= field_errors @req, :target_currency %>
@@ -25,7 +25,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= f.label :amount, "Amount" %>
-        <%= f.number_field :amount, class: field_class_name(@req, :amount) %>
+        <%= f.number_field :amount, required: true, class: field_class_name(@req, :amount) %>
 
         <%= field_errors @req, :amount %>
       </div>
@@ -33,32 +33,16 @@
       <div class="form-group col-md-6">
         <%= f.label :waiting_time, "Max waiting time" %>
         <%= f.number_field :waiting_time,
+              required: true,
               in: 1..255, class: field_class_name(@req, :waiting_time) %>
 
         <%= field_errors @req, :waiting_time %>
       </div>
     </div>
+    <%= f.hidden_field :user_id %>
+
     <%= submit_tag "Find and save", class: "btn btn-primary" %>
     <%= submit_tag "Find", class: "btn btn-primary" %>
 
   <% end %>
-  <div class="dropdown show">
-    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Saved requests
-    </a>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <% current_user.prediction_requests.each do |request| %>
-        <span class="dropdown-item">
-          <span class="badge badge-secondary">X</span>
-          <a href="#">
-            <%= request.base_currency %> to
-            <%= request.target_currency %>;
-            Amount: <%= request.amount %>;
-            Waiting time:<%= request.waiting_time %>
-          </a>
-        </span>
-      <% end %>
-    </div>
-  </div>
 </div>
