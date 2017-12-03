@@ -1,4 +1,4 @@
-class DayRate < ApplicationRecord
+class Quote < ApplicationRecord
   validates :base_currency, :date, :provider, :rates, presence: true
   validates :date, uniqueness: { scope: :base_currency }
 

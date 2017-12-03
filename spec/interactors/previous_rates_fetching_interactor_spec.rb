@@ -2,10 +2,11 @@ require 'active_support/core_ext/numeric/time'
 require 'spec_helper'
 require_relative '../../app/interactors/previous_rates_fetching_interactor'
 
+# rubocop:disable Metrics/BlockLength
 describe PreviousRatesFetchingInteractor do
-  let(:forcast_request) { double :ForcastRequest }
+  let(:forecast_request) { double :forecastRequest }
 
-  subject { PreviousRatesFetchingInteractor.new(1, forcast_request) }
+  subject { PreviousRatesFetchingInteractor.new(forecast_request) }
 
   let(:cached_rates)  { [double(:DayRate1, date: Date.today)] }
   let(:missing_rates) { [double(:DayRate2, date: Date.today - 1.day)] }
@@ -43,14 +44,16 @@ describe PreviousRatesFetchingInteractor do
     let(:fetcher_instance) { double('FetcherInstance', call: []) }
     let(:fetcher) do
       class_double(
-        '::Providers::FixerIo::FetchDayRates',
+        '::Providers::FixerIo::FetchQuotes',
         new: fetcher_instance
       ).as_stubbed_const
     end
 
     before do
       expect(fetcher).to receive(:new)
-      expect(fetcher_instance).to receive(:call).with(missing_days) { missing_rates }
+      expect(fetcher_instance).to receive(:call).with(missing_days) do
+        missing_rates
+      end
 
       subject.missing_days = missing_days
       subject.fetch_missing_rates
@@ -60,10 +63,11 @@ describe PreviousRatesFetchingInteractor do
   end
 
   describe '.fetch_previous_rates' do
-    let(:day_rate) { class_double('DayRate').as_stubbed_const }
+    let(:quote) { class_double('Quote').as_stubbed_const }
 
     before do
-      expect(day_rate).to receive(:previous).with(1, forcast_request).and_return(cached_rates)
+      expect(quote).to receive(:previous).with(1, forecast_request)
+                                         .and_return(cached_rates)
 
       subject.fetch_previous_rates
     end

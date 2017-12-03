@@ -17,7 +17,7 @@ class PreviousRatesFetchingInteractor
   end
 
   def fetch_previous_rates
-    @cached_rates = DayRate.previous @forecast_request
+    @cached_rates = Quote.previous @forecast_request
   end
 
   def cached_weeks
@@ -40,7 +40,7 @@ class PreviousRatesFetchingInteractor
 
   def fetch_missing_rates
     if @missing_weeks
-      actor = ::Providers::FixerIo::FetchDayRates
+      actor = ::Providers::FixerIo::FetchQuotes
               .new(@forecast_request, @missing_weeks)
       @missing_rates = actor.call || []
     else

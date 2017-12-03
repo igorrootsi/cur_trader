@@ -37,15 +37,15 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'shoulda-matchers', '~> 3.1'
   gem 'rspec-its'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
   gem 'debase', require: false
-  gem 'rdoc', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rcodetools', github: 'rcodetools', branch: :master, require: false
+  gem 'rdoc', require: false
   gem 'rubocop', require: false
   gem 'ruby-debug-ide', require: false
   gem 'slim_lint', require: false

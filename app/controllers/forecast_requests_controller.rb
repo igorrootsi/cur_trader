@@ -1,3 +1,4 @@
+# @attr [User] current_user
 class ForecastRequestsController < ApplicationController
   def index
     @forecast_requests = current_user.forecast_requests
