@@ -1,6 +1,6 @@
 module Providers
   module FixerIo
-    class DayRate
+    class Quote
       attr_accessor :base_currency, :date, :rates, :provider
 
       def initialize(args)

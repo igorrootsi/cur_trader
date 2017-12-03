@@ -32,7 +32,7 @@ module Providers
         url = "https://api.fixer.io/#{week}"
         params = { params: { base: @req.base_currency }}
         response = RestClient.get url, params
-        obj = Providers::FixerIo::DayRate.new(JSON.parse(response))
+        obj = Providers::FixerIo::Quote.new(JSON.parse(response))
 
         progress = @received_data.length * 100 / @req.waiting_time
         send(progress)
