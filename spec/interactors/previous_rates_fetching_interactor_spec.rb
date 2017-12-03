@@ -5,7 +5,7 @@ require_relative '../../app/interactors/previous_rates_fetching_interactor'
 describe PreviousRatesFetchingInteractor do
   let(:forecast_request) { double :forecastRequest }
 
-  subject { PreviousRatesFetchingInteractor.new(1, forecast_request) }
+  subject { PreviousRatesFetchingInteractor.new(forecast_request) }
 
   let(:cached_rates)  { [double(:DayRate1, date: Date.today)] }
   let(:missing_rates) { [double(:DayRate2, date: Date.today - 1.day)] }
@@ -43,7 +43,7 @@ describe PreviousRatesFetchingInteractor do
     let(:fetcher_instance) { double('FetcherInstance', call: []) }
     let(:fetcher) do
       class_double(
-        '::Providers::FixerIo::FetchDayRates',
+        '::Providers::FixerIo::FetchQuotes',
         new: fetcher_instance
       ).as_stubbed_const
     end

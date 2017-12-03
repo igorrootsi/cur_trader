@@ -14,7 +14,3 @@ begin
 rescue LoadError
   # no rspec available
 end
-
-task :guard do
-  %x{ bundle exec guard }
-end

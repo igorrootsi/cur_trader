@@ -8,26 +8,24 @@ describe Quote do
 end
 
 describe Quote, '.previous' do
-  let(:period) { 5 }
   let(:base_currency) { 'EUR' }
   let(:forecast_request) do
-    build :forecast_request, base_currency: base_currency
+    build :forecast_request, base_currency: base_currency, waiting_time: 5
   end
-  let!(:quote) {
+  let!(:quote) do
     create :quote, date: Date.today - period.days, base_currency: base_currency
-  }
+  end
+  subject { Quote.previous(forecast_request) }
 
   context 'Cached rates are present at given period' do
     it 'should find all cached rates' do
-      result = Quote.previous(period, forecast_request)
-
-      expect(result).to eq [quote]
+      expect(subject).to eq [quote]
     end
   end
 
   context 'Cached rates are missing at given period' do
     it 'should not return old rates' do
-      result = Quote.previous(period - 1, forecast_request)
+      result = Quote.previous(forecast_request)
 
       expect(result).to eq []
     end
@@ -37,7 +35,7 @@ describe Quote, '.previous' do
     it 'should not return rates for wrong base_currency' do
       forecast_request.base_currency = 'WRONG'
 
-      result = Quote.previous(period, forecast_request)
+      result = Quote.previous(forecast_request)
 
       expect(result).to eq []
     end

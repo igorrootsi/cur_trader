@@ -1,6 +1,6 @@
 module Providers
   module FixerIo
-    class FetchDayRates
+    class FetchQuotes
       def initialize(req, missing_weeks)
         @req = req
         @missing_weeks = missing_weeks
@@ -30,7 +30,7 @@ module Providers
 
       def fetch(week)
         url = "https://api.fixer.io/#{week}"
-        params = { params: { base: @req.base_currency }}
+        params = { params: { base: @req.base_currency } }
         response = RestClient.get url, params
         obj = Providers::FixerIo::Quote.new(JSON.parse(response))
 

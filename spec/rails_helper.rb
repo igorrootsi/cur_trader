@@ -4,7 +4,10 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
+
 require 'rspec/rails'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -24,13 +27,13 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :feature) do
-    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+    strategy = if Capybara.current_driver == :rack_test
+                 :transaction
+               else
+                 :truncation
+               end
 
-    if driver_shares_db_connection_with_specs
-      DatabaseCleaner.strategy = :transaction
-    else
-      DatabaseCleaner.strategy = :truncation
-    end
+    DatabaseCleaner.strategy = strategy
   end
 
   config.before(:each) do

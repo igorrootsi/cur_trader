@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Trader</h2>
 
-  <%= render 'traders/form' do %>
+  <%= render 'form' do %>
     <%= hidden_field :forecast_request, :id %>
     <%= submit_tag "Update and fetch", data: { after: 'update' }, class: "btn btn-primary" %>
     <%= submit_tag "Find", data: { after: '' }, class: "btn btn-primary" %>

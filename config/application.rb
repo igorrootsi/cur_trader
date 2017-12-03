@@ -7,7 +7,7 @@ Bundler.require(*Rails.groups)
 module CurTrader
   class Application < Rails::Application
     config.load_defaults 5.1
-    config.action_view.field_error_proc = Proc.new do |html_tag, _instance|
+    config.action_view.field_error_proc = proc do |html_tag, _instance|
       html_tag.html_safe
     end
 

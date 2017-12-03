@@ -22,6 +22,7 @@ RSpec.configure do |config|
     begin
       FactoryBot.find_definitions
     rescue
+      puts 'All factories are found'
     end
   end
 end

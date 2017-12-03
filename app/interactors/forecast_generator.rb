@@ -3,13 +3,13 @@ class ForecastGenerator
   # @param [ForecastResponseDTO] dto
   def initialize(forecast_request, dto)
     @forecast_request = forecast_request
-    @dto                = dto
+    @dto              = dto
   end
 
   def call
     generate_quotes
     @dto.ranks = @dto.quotes.max(3)
-    @dto.base = @dto.quotes.first.rate
+    @dto.base  = @dto.quotes.first.rate
 
     @dto
   end
