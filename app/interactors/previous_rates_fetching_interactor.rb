@@ -17,7 +17,7 @@ class PreviousRatesFetchingInteractor
   end
 
   def fetch_previous_rates
-    @cached_rates = DayRate.previous @forecast_request
+    @cached_rates = Quote.previous @forecast_request
   end
 
   def cached_weeks

@@ -10,7 +10,7 @@ module Providers
       def call
         iterate
 
-        ::DayRate.create(JSON.parse(@received_data.to_json))
+        ::Quote.create(JSON.parse(@received_data.to_json))
       end
 
       def iterate

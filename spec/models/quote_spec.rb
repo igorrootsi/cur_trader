@@ -13,15 +13,15 @@ describe Quote, '.previous' do
   let(:forecast_request) do
     build :forecast_request, base_currency: base_currency
   end
-  let!(:day_rate) {
-    create :day_rate, date: Date.today - period.days, base_currency: base_currency
+  let!(:quote) {
+    create :quote, date: Date.today - period.days, base_currency: base_currency
   }
 
   context 'Cached rates are present at given period' do
     it 'should find all cached rates' do
       result = Quote.previous(period, forecast_request)
 
-      expect(result).to eq [day_rate]
+      expect(result).to eq [quote]
     end
   end
 

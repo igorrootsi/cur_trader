@@ -60,10 +60,10 @@ describe PreviousRatesFetchingInteractor do
   end
 
   describe '.fetch_previous_rates' do
-    let(:day_rate) { class_double('DayRate').as_stubbed_const }
+    let(:quote) { class_double('Quote').as_stubbed_const }
 
     before do
-      expect(day_rate).to receive(:previous).with(1, forecast_request).and_return(cached_rates)
+      expect(quote).to receive(:previous).with(1, forecast_request).and_return(cached_rates)
 
       subject.fetch_previous_rates
     end

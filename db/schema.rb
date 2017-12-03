@@ -10,17 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203135813) do
+ActiveRecord::Schema.define(version: 20171203175104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "day_rates", force: :cascade do |t|
-    t.string "provider"
-    t.string "base_currency", limit: 3
-    t.datetime "date"
-    t.jsonb "rates"
-  end
 
   create_table "forecast_requests", force: :cascade do |t|
     t.bigint "user_id"
@@ -31,6 +24,13 @@ ActiveRecord::Schema.define(version: 20171203135813) do
     t.string "stream_name"
     t.string "after"
     t.index ["user_id"], name: "index_forecast_requests_on_user_id"
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.string "provider"
+    t.string "base_currency", limit: 3
+    t.datetime "date"
+    t.jsonb "rates"
   end
 
   create_table "users", force: :cascade do |t|
