@@ -25,7 +25,9 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= f.label :amount, "Amount" %>
-        <%= f.number_field :amount, required: true, class: field_class_name(@forecast_request, :amount) %>
+        <%= f.number_field :amount,
+                           required: true,
+                           class: field_class_name(@forecast_request, :amount) %>
 
         <%= field_errors @forecast_request, :amount %>
       </div>
@@ -33,8 +35,9 @@
       <div class="form-group col-md-6">
         <%= f.label :waiting_time, "Max waiting time" %>
         <%= f.number_field :waiting_time,
-              required: true,
-              in: 1..255, class: field_class_name(@forecast_request, :waiting_time) %>
+                           required: true,
+                           in: 1..250,
+                           class: field_class_name(@forecast_request, :waiting_time) %>
 
         <%= field_errors @forecast_request, :waiting_time %>
       </div>
