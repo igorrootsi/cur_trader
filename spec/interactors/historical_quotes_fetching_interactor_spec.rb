@@ -50,9 +50,9 @@ describe HistoricalQuotesFetchingInteractor do
 
     context 'not all quotes are cached' do
       before do
-        expect(fetcher).to receive(:new).with(forecast_request, missing_weeks) do
-          fetcher_instance
-        end
+        expect(fetcher).to receive(:new)
+          .with(forecast_request, missing_weeks)
+          .and_return(fetcher_instance)
 
         expect(fetcher_instance).to receive(:call) do
           missing_quotes
@@ -64,7 +64,6 @@ describe HistoricalQuotesFetchingInteractor do
 
       its(:missing_quotes) { is_expected.to be(missing_quotes) }
     end
-
   end
 
   describe '.fetch_previous_quotes' do

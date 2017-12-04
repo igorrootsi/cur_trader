@@ -38,8 +38,8 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'rspec-its'
-  gem 'simplecov', :require => false
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', require: false
 end
 
 group :development do

@@ -11,7 +11,7 @@ describe ForecastFetchingInteractor, '#new' do
 end
 
 describe ForecastFetchingInteractor, '.call' do
-  subject { ForecastFetchingInteractor.new(double 'ForecastRequest') }
+  subject { ForecastFetchingInteractor.new(double('ForecastRequest')) }
 
   before do
     expect(subject).to receive(:fetch_previous_quotes)
@@ -90,5 +90,3 @@ describe ForecastFetchingInteractor do
     its('dto.base') { is_expected.to eq 5 }
   end
 end
-
-

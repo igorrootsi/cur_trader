@@ -36,4 +36,3 @@ class ForecastFetchingInteractor
     @dto.quotes = actor.call
   end
 end
-
