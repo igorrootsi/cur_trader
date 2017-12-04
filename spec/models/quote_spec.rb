@@ -12,18 +12,26 @@ describe Quote, '.previous' do # rubocop:disable Metrics/BlockLength
   let(:forecast_request) do
     build :forecast_request, base_currency: base_currency, waiting_time: 5
   end
-  let!(:quote) do
-    create :quote, date: Date.today - period.days, base_currency: base_currency
-  end
+
   subject { Quote.previous(forecast_request) }
 
   context 'Cached rates are present at given period' do
+    let!(:quote) do
+      create :quote,
+             date: Date.today - forecast_request.waiting_time.week,
+             base_currency: base_currency
+    end
     it 'should find all cached rates' do
       expect(subject).to eq [quote]
     end
   end
 
   context 'Cached rates are missing at given period' do
+    let!(:quote) do
+      create :quote,
+             date: Date.today - forecast_request.waiting_time.week - 1.week,
+             base_currency: base_currency
+    end
     it 'should not return old rates' do
       result = Quote.previous(forecast_request)
 

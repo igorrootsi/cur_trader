@@ -1,7 +1,7 @@
 require_relative './helpers'
 
-class PreviousRatesFetchingInteractor
-  attr_accessor :cached_rates, :missing_weeks, :missing_rates
+class HistoricalQuotesFetchingInteractor
+  attr_accessor :cached_quotes, :missing_weeks, :missing_quotes
 
   # @param [ForecastRequest] forecast_request
   def initialize(forecast_request)
@@ -9,19 +9,19 @@ class PreviousRatesFetchingInteractor
   end
 
   def call
-    fetch_previous_rates
+    fetch_previous_quotes
     find_missing_weeks
-    fetch_missing_rates
+    fetch_missing_quotes
 
     combine_cached_and_fetched
   end
 
-  def fetch_previous_rates
-    @cached_rates = Quote.previous @forecast_request
+  def fetch_previous_quotes
+    @cached_quotes = Quote.previous @forecast_request
   end
 
   def cached_weeks
-    @cached_rates.map { |quote| coerce_day_to_week(quote.date) }
+    @cached_quotes.map { |quote| coerce_day_to_week(quote.date) }
   end
 
   def find_missing_weeks
@@ -38,19 +38,19 @@ class PreviousRatesFetchingInteractor
     end
   end
 
-  def fetch_missing_rates
-    if @missing_weeks
+  def fetch_missing_quotes
+    if @missing_weeks.any?
       actor = ::Providers::FixerIo::FetchQuotes
               .new(@forecast_request, @missing_weeks)
-      @missing_rates = actor.call || []
+      @missing_quotes = actor.call || []
     else
-      @missing_weeks = []
+      @missing_quotes = []
     end
   end
 
   def combine_cached_and_fetched
     QuoteDecorator.decorate_collection(
-      (@cached_rates + @missing_rates).sort_by(&:date),
+      (@cached_quotes + @missing_quotes).sort_by(&:date),
       context: @forecast_request
     )
   end
