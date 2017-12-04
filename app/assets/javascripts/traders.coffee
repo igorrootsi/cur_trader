@@ -11,6 +11,7 @@ $ ->
       target_currency_field.setCustomValidity('')
 
   $('form#new_forecast_request, form.edit_forecast_request').on 'submit', (event) ->
+    event.preventDefault();
     elements = event.currentTarget.elements
 
     base_currency_field   = elements["forecast_request[base_currency]"]
@@ -23,7 +24,8 @@ $ ->
     if event.currentTarget.checkValidity()
       $('#forecast').html('')
 
-      after = event.originalEvent.explicitOriginalTarget.dataset.after
+      submit_buttons = $("input[type=submit]:focus")
+      after = submit_buttons.length && submit_buttons[0].dataset.after || 'delete'
 
       data = {
         base_currency:   base_currency_field.value

@@ -12,3 +12,9 @@
   <div id="forecast" />
 </div>
 
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $(document.forms[0]).trigger('submit');
+  });
+<% end %>
+
