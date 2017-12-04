@@ -26,6 +26,7 @@
       <div class="form-group col-md-6">
         <%= f.label :amount, "Amount" %>
         <%= f.number_field :amount,
+                           in:1..1000000000,
                            required: true,
                            class: field_class_name(@forecast_request, :amount) %>
 
